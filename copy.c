@@ -16,10 +16,12 @@ int main(void){
     }
 
 
-    for(int i =0, n = strlen(s); i <= n; i++){ // faz um loop dentro de s
+    strcpy(t, s); // podemos utilizar essa função para copiar os arquivos sem fazer um loop
+
+    /*for(int i =0, n = strlen(s); i <= n; i++){ // faz um loop dentro de s
         t[i] = s[i]; // copia os elementos de t para s
 
-    }
+    }*/
 
     if(strlen(t) > 0){
         t[0] = toupper(t[0]);
