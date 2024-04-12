@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//MALLOC APONTA PARA O PRIMEIRO ENDEREÇO DE MEMORIA
+
+
+int main(void){
+
+    int *list = malloc(3 + sizeof(int)); // Criando um ponteiro de listam e alocando na memoria um espaço de 3 inteiros
+    if(list == null){ // Se malloc não conseguir alocar a memoria volte NULL
+      return 1; // termine o programa
+    }
+
+  list[0] = 1;
+  list[1] = 1;
+  list[2] = 1;
+
+  int *tmp = malloc(4 * sizeof(int));
+
+  if(tmp == NULL){
+    free(list); // Caso o programa não rode, limpamos a list para não termos bug no sistema depois
+    return 1;
+  }
+
+  for (int i = 0; i < 3; i++){
+    tmp[i] = list[i];
+  }
+  
+  tmp[3] = 4;
+  free(list);
+  list = tmp; //Colocando o ponteiro de tmp em list
+  
+  for (int i = 0; i<3; i++){
+    printf("%i\n", list[i]);
+  }
+}
