@@ -1,53 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+
 
 typedef struct node
 {
     int number;
+    struct node *right;
     struct node *left;
-    struct node *rigth;
-    
     
 }node;
 
-
-bool search(node *tree, int number);
 node *createNode(int value){
-    node *newNode = malloc(sizeof(node));
-    if (newNode == NULL){
-        return 1;
+    node *newNode = (node *)malloc(sizeof(node));
+    if(newNode == NULL){
+        fprintf(stderr, "Erro ao alocar memória");
+        exit(EXIT_FAILURE);
     }
     newNode->number = value;
+    newNode->right = NULL;
     newNode->left = NULL;
-    newNode->rigth = NULL;
     return newNode;
-}
-
-node *insert(node *root, int value){
-    if (root == NULL){
-        createNode(value);
-    }
-    if (value < root->number)
-    {
-        root->left = insert(root->left, value);
-    }
-    if(value > root->number){
-        root->rigth =  insert(root->rigth, value);
-    }
-    return root;
-    
-}
-int main(int argc,char *argv[]){
-
-
 
 }
 
 
+node *insert(node *tree, int value){
+    if(tree == NULL){
+        return createNode(value);
+    }
+    if(value > tree->number){
+        tree->right = insert(tree->right, value);
+    }
+    if(value < tree->number){
+        tree->left = insert(tree->left, value);
+    }
+}
 
 
-bool search(node *tree, int number){
+void print(node *tree){
+    if(tree != NULL){
+        print(tree->left);
+        printf("%d ", tree->number);
+        print(tree->right);
+    }
+}
+
+
+int main(){
+
+    node *tree = NULL;
+    tree = insert(tree, 50);
+    tree = insert(tree, 20);
+    tree = insert(tree, 70);
+    tree = insert(tree, 80);
+    tree = insert(tree, 90);
+    tree = insert(tree, 200);
+
+    print(tree);
 
 
 }
